@@ -24,7 +24,7 @@ class DeploymentType:
         STAGING: 4
     }
 
-APP_NAME="UVB"
+APP_NAME="uvb"
 ENV_VAR="app_environment"
 DEPLOYMENT = os.environ.get(ENV_VAR, DeploymentType.SOLO).upper()
 
