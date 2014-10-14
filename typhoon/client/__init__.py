@@ -18,8 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 from tornado.options import define, options
 from tornado import httpclient
 import tornado.ioloop
-import tornado.process
 from tornado.ioloop import PeriodicCallback
+
 
 define("target", default="http://starfighter.csh.rit.edu:8080/")
 define("requests", default=1000)
@@ -28,11 +28,13 @@ fizz = 0
 factor = 0
 
 def main():
+    import tornado.process
+    tornado.process.fork_processes(None)
+
     import tornado.options
     tornado.options.parse_command_line()
     global factor
     factor = int(float(options.requests) / float(tornado.process.cpu_count()))
-    tornado.process.fork_processes(None)
 
     PeriodicCallback(is_done, 200).start()
 
