@@ -28,7 +28,7 @@ class CountingHandler(base.BaseHandler):
         if self.get_argument("name", None, True) is not None:
             self.write("yolo")
             self.finish()
-            self.client.update(self.get_argument('name'), {'$inc': {'c': 1}}, upsert=True, attribute="n")
+            yield self.client.update(self.get_argument('name'), {'$inc': {'c': 1}}, upsert=True, attribute="n")
         else:
             self.write("add ?name=yourname to be counted")
 
