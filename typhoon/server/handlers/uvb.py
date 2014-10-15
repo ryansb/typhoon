@@ -24,10 +24,12 @@ class CountingHandler(base.BaseHandler):
         self.client = BaseMongoClient('test', settings)
 
     @coroutine
-    def get(self):
-        if self.get_argument("name", None, True) is not None:
+    def on_finish(self):
+        if self.name is not None:
             self.client.update(self.get_argument('name'), {'$inc': {'c': 1}}, upsert=True, attribute="n")
-            self.write("yolo")
-        else:
-            self.write("add ?name=yourname to be counted")
 
+
+    @coroutine
+    def get(self):
+        self.name = self.get_argument("name", None, True)
+        self.write("yolo")
