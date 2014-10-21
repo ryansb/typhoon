@@ -5,18 +5,6 @@ from typhoon.server.handlers import base
 from typhoon.server.settings import settings
 from typhoon.server.clients.mongo_client import BaseMongoClient
 
-log = logging.getLogger(__name__)
-
-
-class SimpleHandler(base.BaseHandler):
-    def initialize(self):
-         pass
-
-    def get(self):
-        """Example Handler"""
-        self.write("yolo")
-        log.info("hey")
-
 
 class CountingHandler(base.BaseHandler):
     def initialize(self):
